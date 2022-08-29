@@ -3,7 +3,7 @@ package cache_v2
 import (
 	"sync"
 
-	"github.com/alexeykirinyuk/async-cache/internal/storage"
+	"github.com/alexeykirinyuk/async-cache/internal/helpers"
 )
 
 type CacheImpl struct {
@@ -32,7 +32,7 @@ func (c *CacheImpl) Get(key string) (string, error) {
 
 	val, ok := c.m[key]
 	if !ok {
-		return "", storage.ErrNotFound
+		return "", helpers.ErrNotFound
 	}
 
 	return val, nil
@@ -44,7 +44,7 @@ func (c *CacheImpl) Delete(key string) error {
 
 	_, ok := c.m[key]
 	if !ok {
-		return storage.ErrNotFound
+		return helpers.ErrNotFound
 	}
 
 	delete(c.m, key)
